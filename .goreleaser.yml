@@ -7,7 +7,6 @@ builds:
   - binary: yq
     main: main.go
     goos:
-      - windows
       - darwin
       - linux
     goarch:

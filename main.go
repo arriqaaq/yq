@@ -179,7 +179,8 @@ type tree struct {
 
 func newTree() *tree {
 	t := &tree{
-		TreeView: tview.NewTreeView(),
+		TreeView:   tview.NewTreeView(),
+		isExpanded: true,
 	}
 
 	// t.SetBorder(true).SetTitle("yaml tree").SetTitleAlign(tview.AlignLeft)
