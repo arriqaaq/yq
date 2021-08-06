@@ -1,0 +1,25 @@
+env:
+  - GO111MODULE=on
+  - CGO_ENABLED=0
+  - RELEASE_BUILDS=dist/yq_darwin_amd64/yq dist/yq_linux_amd64/yq dist/yq_windows_amd64/yq.exe
+
+builds:
+  - binary: yq
+    main: main.go
+    goos:
+      - windows
+      - darwin
+      - linux
+    goarch:
+      - amd64
+    ldflags:
+      - -s -w -X "main.buildVersion={{ .Tag }} ({{ .ShortCommit }} {{ .Date }})"
+    hooks:
+      # stuff executables with static assets.
+      post: make pack-releases
+
+archives:
+  - format: tar.gz
+    files:
+      - README.md
+      - LICENSE
