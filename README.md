@@ -39,7 +39,9 @@ $ kubectl get pod kube-dns -n kube-system -oyaml | yq
 
 | key    | description                    |
 |--------|--------------------------------|
-| s      | hide/show current node              |
-| S      | collaspe/expand all value nodes           |
+| s      | show current node              |
+| S      | expand all value nodes         |
+| x      | hide current node              |
+| X      | collapse all value nodes       |
 | / or f | search nodes                   |
-| q | quit                   |
+| q      | quit                           |

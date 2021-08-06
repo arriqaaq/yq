@@ -173,14 +173,12 @@ func (g *yq) walk(nodes []*tview.TreeNode, text string) []*tview.TreeNode {
 
 type tree struct {
 	*tview.TreeView
-	root       *tview.TreeNode
-	isExpanded bool
+	root *tview.TreeNode
 }
 
 func newTree() *tree {
 	t := &tree{
-		TreeView:   tview.NewTreeView(),
-		isExpanded: true,
+		TreeView: tview.NewTreeView(),
 	}
 
 	// t.SetBorder(true).SetTitle("yaml tree").SetTitleAlign(tview.AlignLeft)
@@ -276,20 +274,13 @@ func (t *tree) SetKeybindings(g *yq) {
 	t.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		switch event.Rune() {
 		case 's':
-			if t.isExpanded {
-				t.isExpanded = false
-			} else {
-				t.isExpanded = true
-			}
-			t.GetCurrentNode().SetExpanded(t.isExpanded)
+			t.GetCurrentNode().SetExpanded(true)
+		case 'x':
+			t.GetCurrentNode().SetExpanded(false)
 		case 'S':
-			if t.isExpanded {
-				t.isExpanded = false
-				t.CollapseValues(t.GetRoot())
-			} else {
-				t.isExpanded = true
-				t.GetRoot().ExpandAll()
-			}
+			t.GetRoot().ExpandAll()
+		case 'X':
+			t.CollapseValues(t.GetRoot())
 		case '/', 'f':
 			g.Search()
 		case ' ':
